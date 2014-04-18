@@ -49,6 +49,23 @@ public class Application {
         }
         System.out.println();
         
+        
+        locations = repository.findByBankNameAndCity("Citibank", "Boston");
+        System.out.println("Branch locations found with findByBankNameAndCity(\"Citibank\", \"Boston\"):");
+        System.out.println("-------------------------------");
+        for (BranchLocation location : locations) {
+            System.out.println(location);
+        }
+        System.out.println();
+        
+        locations = repository.findByBankNameAndBranchNameAndState("Bank of Texas", "Downtown Penn", "TX");
+        System.out.println("Branch locations found with findByBankNameAndBranchNameAndState(\"Bank of Texas\", \"Downtown Pennb\", \"TX\")");
+        System.out.println("-------------------------------");
+        for (BranchLocation location : locations) {
+            System.out.println(location);
+        }
+        System.out.println();
+        
         context.close();
     }
 
