@@ -17,7 +17,7 @@ public interface BranchLocationRepository extends CrudRepository<BranchLocation,
     List<BranchLocation> findByPhoneNumber(String phoneNumber);
     
     
-    //find by two fields (bank name and others)
+    //find by two fields (bank name AND others)
     //Note: This is a lot of methods, and this is just those with Bank name. 
     //Imagine what happens as we included all the fields and every combiniation
     List<BranchLocation> findByBankNameAndBranchName(String bankName, String branchName);
@@ -33,4 +33,20 @@ public interface BranchLocationRepository extends CrudRepository<BranchLocation,
     // This list of method combinations is even larger than the last
     List<BranchLocation> findByBankNameAndBranchNameAndState(String bankName, String state, String zip);
     // ...
+    
+    //find by two fields (bank name OR others)
+    //Note: This is even more methods, and once again this is just those with Bank name. 
+    //Imagine what happens again as we include all the fields and every combiniation
+    List<BranchLocation> findByBankNameOrBranchName(String bankName, String branchName);
+    List<BranchLocation> findByBankNameOrAddress(String bankName, String address);
+    List<BranchLocation> findByBankNameOrCity(String bankName, String city);
+    List<BranchLocation> findByBankNameOrState(String bankName, String state);
+    List<BranchLocation> findByBankNameOrZip(String bankName, String zip);
+    List<BranchLocation> findByBankNameOrCountry(String bankName, String country);
+    List<BranchLocation> findByBankNameOrPhoneNumber(String bankName, String phoneNumber);
+    // ...
+    
+    //find by three fields 
+    // This list of method combinations is even larger than the last
+    List<BranchLocation> findByBankNameOrBranchNameOrState(String bankName, String state, String zip);
 }
