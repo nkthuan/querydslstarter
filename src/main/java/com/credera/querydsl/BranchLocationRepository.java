@@ -19,7 +19,7 @@ public interface BranchLocationRepository extends CrudRepository<BranchLocation,
     
     //find by two fields (bank name and others)
     //Note: This is a lot of methods, and this is just those with Bank name. 
-    //Imagine what happens as we included all the fields and every combiniation
+    //Imagine what happens as we included all the fields and every combination
     List<BranchLocation> findByBankNameAndBranchName(String bankName, String branchName);
     List<BranchLocation> findByBankNameAndAddress(String bankName, String address);
     List<BranchLocation> findByBankNameAndCity(String bankName, String city);
