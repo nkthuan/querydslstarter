@@ -33,7 +33,8 @@ public class Application {
         }
         System.out.println();
 
-        locations = repository.findByBankName("Bank of Texas");
+        QBranchLocation branchLocation = QBranchLocation.branchLocation;
+        locations = repository.findAll(branchLocation.bankName.eq("Bank of Texas"));
         System.out.println("Branch locations found with findByBankName(\"Bank of Texas\"):");
         System.out.println("-------------------------------");
         for (BranchLocation location : locations) {
@@ -41,7 +42,7 @@ public class Application {
         }
         System.out.println();
         
-        locations = repository.findByState("CT");
+        locations = repository.findAll(branchLocation.state.eq("CT"));
         System.out.println("Branch locations found with findByState(\"CT\"):");
         System.out.println("-------------------------------");
         for (BranchLocation location : locations) {
@@ -50,7 +51,7 @@ public class Application {
         System.out.println();
         
         
-        locations = repository.findByBankNameAndCity("Citibank", "Boston");
+        locations = repository.findAll(branchLocation.bankName.eq("Citibank").and(branchLocation.city.eq("Boston")));
         System.out.println("Branch locations found with findByBankNameAndCity(\"Citibank\", \"Boston\"):");
         System.out.println("-------------------------------");
         for (BranchLocation location : locations) {
@@ -58,15 +59,15 @@ public class Application {
         }
         System.out.println();
         
-        locations = repository.findByBankNameAndBranchNameAndState("Bank of Texas", "Downtown Penn", "TX");
-        System.out.println("Branch locations found with findByBankNameAndBranchNameAndState(\"Bank of Texas\", \"Downtown Pennb\", \"TX\")");
+        locations = repository.findAll(branchLocation.bankName.eq("Bank of Texas").and(branchLocation.branchName.eq("Downtown Penn").and(branchLocation.state.eq("TX"))));
+        System.out.println("Branch locations found with findByBankNameAndBranchNameAndState(\"Bank of Texas\", \"Downtown Penn\", \"TX\")");
         System.out.println("-------------------------------");
         for (BranchLocation location : locations) {
             System.out.println(location);
         }
         System.out.println();
         
-        locations = repository.findByBankNameOrCity("Bank of Texas", "New Haven");
+        locations = repository.findAll(branchLocation.bankName.eq("Bank of Texas").or(branchLocation.city.eq("New Haven")));
         System.out.println("Branch locations found with findByBankNameOrCity(\"Bank of Texas\", \"New Haven\"):");
         System.out.println("-------------------------------");
         for (BranchLocation location : locations) {
@@ -74,7 +75,7 @@ public class Application {
         }
         System.out.println();
         
-        locations = repository.findByBankNameOrBranchNameOrState("Wells Fargo", "Royal Lane", "MA");
+        locations = repository.findAll(branchLocation.bankName.eq("Wells Fargo").or(branchLocation.branchName.eq("Royal Lane").or(branchLocation.state.eq("MA"))));
         System.out.println("Branch locations found with findByBankNameOrBranchNameOrState(\"Wells Fargo\", \"Royal Lane\", \"MA\")");
         System.out.println("-------------------------------");
         for (BranchLocation location : locations) {

@@ -13,6 +13,9 @@ apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
 
+// Enable QueryDsl generation
+apply from: rootProject.file('gradle/querydsl.gradle')
+
 jar {
     baseName = 'querydsl-example'
     version =  '0.1.0'
