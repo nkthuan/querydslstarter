@@ -79,6 +79,14 @@ public class Application {
         }
         System.out.println();
         
+        transactions = transactionService.findAll(tr.customer.account.accountNumber.eq("583942302"));
+        System.out.println("Transactions found for Franks account number:");
+        System.out.println("-------------------------------");
+        for (Transaction transaction : transactions) {
+            System.out.println(transaction);
+        }
+        System.out.println();
+        
         context.close();
     }
 

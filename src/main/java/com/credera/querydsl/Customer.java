@@ -1,9 +1,11 @@
 package com.credera.querydsl;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity(name="customer")
 public class Customer {
@@ -15,17 +17,19 @@ public class Customer {
     private String username;
     private String firstName;
     private String lastName;
-    private String accountNumber;
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    private Account account;
  
     protected Customer() {
         
     }
     
-    public Customer(String username, String firstName, String lastName, String accountNumber) {
+    public Customer(String username, String firstName, String lastName, Account account) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.accountNumber = accountNumber;
+        this.account = account;
     }
     
     public String getUsername() {
@@ -52,18 +56,18 @@ public class Customer {
         this.lastName = lastName;
     }
 
-    public String getAccountNumber() {
-        return accountNumber;
+    public Account getAccount() {
+        return account;
     }
 
-    public void setAccountNumber(String accountNumber) {
-        this.accountNumber = accountNumber;
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
     @Override
     public String toString() {
         return String.format(
-                "Customer[id=%d, firstName='%s', lastName='%s', accountNumber='%s']",
-                id, firstName, lastName, accountNumber);
+                "Customer[id=%d, firstName='%s', lastName='%s', account='%s']",
+                id, firstName, lastName, account);
     }
 }
