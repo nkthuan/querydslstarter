@@ -12,6 +12,7 @@ public class Customer {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
     
+    private String username;
     private String firstName;
     private String lastName;
     private String accountNumber;
@@ -20,12 +21,21 @@ public class Customer {
         
     }
     
-    public Customer(String firstName, String lastName, String accountNumber) {
+    public Customer(String username, String firstName, String lastName, String accountNumber) {
+        this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.accountNumber = accountNumber;
     }
     
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public String getFirstName() {
         return firstName;
     }

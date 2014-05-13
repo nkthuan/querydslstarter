@@ -25,9 +25,9 @@ public class SeedData {
         BranchLocation bl3 = branchRepository.save(new BranchLocation("Citibank", "Government Center", "100 Cambridge Street", "Boston", "MA", "02114", "USA", "617-849-7544"));
         
         //save some users
-        Customer frank = customerRepository.save(new Customer("Frank", "Wood","583942302"));
-        Customer alice = customerRepository.save(new Customer("Alice", "Lain","294032410"));
-        Customer matt = customerRepository.save(new Customer("Matt", "Lean","034502102"));
+        Customer frank = customerRepository.save(new Customer("fwood","Frank", "Wood","583942302"));
+        Customer alice = customerRepository.save(new Customer("alain", "Alice", "Lain","294032410"));
+        Customer matt = customerRepository.save(new Customer("mlean", "Matt", "Lean","034502102"));
         
         //save some transactions
         transactionRepository.save(new Transaction(frank, bl1 , 10457.83));
