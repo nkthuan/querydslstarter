@@ -40,10 +40,11 @@ public class Application {
         System.out.println();
         
         //Simulate user authentication and save current user in thread local. 
-        UserService.setCurrentUser("Frank");
+        UserService.setCurrentUser("fwood");
         
         // fetch all transactions
-        Iterable<Transaction> transactions = transactionRepository.findAll();
+        QTransaction tr = QTransaction.transaction;
+        Iterable<Transaction> transactions = transactionRepository.findAll(tr.customer.username.eq(UserService.getCurrentUser()));
         System.out.println("Transactions found with findAll():");
         System.out.println("-------------------------------");
         for (Transaction transaction : transactions) {
@@ -52,18 +53,16 @@ public class Application {
         System.out.println();
         
         // fetch all transctions for Bank of Texas
-        QTransaction tr = QTransaction.transaction;
-        transactions = transactionRepository.findAll(tr.branchLocation.bankName.eq("Bank of Texas"));
+        transactions = transactionRepository.findAll(tr.branchLocation.bankName.eq("Bank of Texas").and(tr.customer.username.eq(UserService.getCurrentUser())));
         System.out.println("Transactions found for \"Bank of Texas\" locations:");
         System.out.println("-------------------------------");
         for (Transaction transaction : transactions) {
             System.out.println(transaction);
         }
         System.out.println();
-        
-        
+
         // fetch all transctions over $10,000
-        transactions = transactionRepository.findAll(tr.transactionAmount.gt(10000));
+        transactions = transactionRepository.findAll(tr.transactionAmount.gt(10000).and(tr.customer.username.eq(UserService.getCurrentUser())));
         System.out.println("Transactions found with amount over $10,000:");
         System.out.println("-------------------------------");
         for (Transaction transaction : transactions) {
@@ -72,7 +71,7 @@ public class Application {
         System.out.println();
         
         // fetch all Alice's transactions
-        transactions = transactionRepository.findAll(tr.customer.username.eq("alain"));
+        transactions = transactionRepository.findAll(tr.customer.username.eq("alain").and(tr.customer.username.eq(UserService.getCurrentUser())));
         System.out.println("Transactions found for Alice:");
         System.out.println("-------------------------------");
         for (Transaction transaction : transactions) {
