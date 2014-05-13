@@ -39,6 +39,9 @@ public class Application {
         }
         System.out.println();
         
+        //Simulate user authentication and save current user in thread local. 
+        UserService.setCurrentUser("Frank");
+        
         // fetch all transactions
         Iterable<Transaction> transactions = transactionRepository.findAll();
         System.out.println("Transactions found with findAll():");
@@ -69,7 +72,7 @@ public class Application {
         System.out.println();
         
         // fetch all Alice's transactions
-        transactions = transactionRepository.findAll(tr.customer.firstName.eq("Alice"));
+        transactions = transactionRepository.findAll(tr.customer.username.eq("alain"));
         System.out.println("Transactions found for Alice:");
         System.out.println("-------------------------------");
         for (Transaction transaction : transactions) {
