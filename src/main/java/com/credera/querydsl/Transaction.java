@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.mysema.query.annotations.QueryInit;
+
 @Entity(name = "transaction")
 public class Transaction {
     
@@ -14,6 +16,7 @@ public class Transaction {
     private long id;
     
     @ManyToOne
+    @QueryInit("account")
     private Customer customer;
     
     @ManyToOne
