@@ -59,10 +59,10 @@ public class Transaction {
     @Override
     public String toString() {
         return String.format(
-                "Transaction[id=%d, customer='%s', accountNumber='%s', branchLocation='%s', transactionAccount='$%.2f']",
+                "Transaction[id=%d, customer='%s', account='%s', branchLocation='%s', transactionAccount='$%.2f']",
                 id, 
                 customer.getFirstName() + " " + customer.getLastName(),
-                customer.getAccountNumber(),
+                customer.getAccount(),
                 branchLocation.getBankName() + " - " + branchLocation.getBranchName(),
                 transactionAmount);
     }
