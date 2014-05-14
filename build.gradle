@@ -13,9 +13,6 @@ apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
 
-// Enable QueryDsl generation
-apply from: rootProject.file('gradle/querydsl.gradle')
-
 jar {
     baseName = 'querydsl-example'
     version =  '0.1.0'
@@ -27,12 +24,38 @@ repositories {
     maven { url "https://repository.jboss.org/nexus/content/repositories/releases" }
 }
 
+configurations {
+    querydslapt
+}
+
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
     compile("com.h2database:h2")
     testCompile("junit:junit")
+    
+    // for the anontation processor
+    querydslapt group: 'com.mysema.querydsl', name: 'querydsl-jpa', version: '2.8.0', classifier: 'apt-one-jar', transitive: false
+
+    // for compiling
+    compile("com.mysema.querydsl:querydsl-jpa:3.3.3")
+    compile("com.mysema.querydsl:querydsl-apt:3.3.3")
 }
 
 task wrapper(type: Wrapper) {
     gradleVersion = '1.11'
+}
+
+//Querydsl 
+def generatedSrcDir = 'src/main/generated'
+task createGeneratedSrcDir << {
+    file(generatedSrcDir).mkdirs()
+}
+compileJava.dependsOn createGeneratedSrcDir
+
+compileJava {
+  options.compilerArgs << '-processor' << 'com.mysema.query.apt.jpa.JPAAnnotationProcessor' << '-s' << file(generatedSrcDir).absolutePath
+}
+
+clean {
+    delete generatedSrcDir
 }
