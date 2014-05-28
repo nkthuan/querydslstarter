@@ -71,16 +71,7 @@ public class Application {
         System.out.println();
         
         // fetch all Alice's transactions
-        transactions = transactionRepository.findAll(tr.customer.username.eq("alain").and(tr.customer.username.eq(UserService.getCurrentUser())));
-        System.out.println("Transactions found for Alice:");
-        System.out.println("-------------------------------");
-        for (Transaction transaction : transactions) {
-            System.out.println(transaction);
-        }
-        System.out.println();
-        
-        // fetch all Alice's transactions, this time ignore who is logged in
-        transactions = transactionRepository.findAll(tr.customer.username.eq("alain").and(tr.customer.username.eq("alain")));
+        transactions = transactionRepository.findAll(tr.customer.username.eq("alain"));
         System.out.println("Transactions found for Alice:");
         System.out.println("-------------------------------");
         for (Transaction transaction : transactions) {
