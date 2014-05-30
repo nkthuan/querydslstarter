@@ -27,7 +27,8 @@ public class SeedData {
         //save some users
         Customer frank = customerRepository.save(new Customer("fwood","Frank", "Wood", new Account("583942302", "Checking")));
         Customer alice = customerRepository.save(new Customer("alain", "Alice", "Lain", new Account("294032410", "Checking")));
-        Customer matt = customerRepository.save(new Customer("mlean", "Matt", "Lean", new Account("034502102", "Savings")));
+        Customer matt = customerRepository.save(new Customer("mlean", "Matt", "Lean", new Account("034502102", "Savings", alice)));
+        matt = customerRepository.save(matt);
         
         //save some transactions
         transactionRepository.save(new Transaction(frank, bl1 , 10457.83));
