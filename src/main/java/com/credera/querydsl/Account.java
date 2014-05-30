@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity(name = "account")
 public class Account {
@@ -16,6 +17,9 @@ public class Account {
     
     private String accountType;
     
+    @ManyToOne()
+    private Customer custodialAccountHolder;
+    
     protected Account() {
         
     }
@@ -24,6 +28,13 @@ public class Account {
         super();
         this.accountNumber = accountNumber;
         this.accountType = accountType;
+    }
+    
+    public Account(String accountNumber, String accountType, Customer custodialAccountHolder) {
+        super();
+        this.accountNumber = accountNumber;
+        this.accountType = accountType;
+        this.custodialAccountHolder = custodialAccountHolder;
     }
 
     public String getAccountNumber() {

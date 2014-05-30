@@ -16,7 +16,7 @@ public class Transaction {
     private long id;
     
     @ManyToOne
-    @QueryInit("account")
+    @QueryInit("account.custodialAccountHolder")
     private Customer customer;
     
     @ManyToOne
