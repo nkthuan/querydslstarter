@@ -11,7 +11,7 @@ public class BranchLocation {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
-    
+
     private String bankName;
     private String branchName;
     private String address;
@@ -24,19 +24,34 @@ public class BranchLocation {
     protected BranchLocation() {}
 
     public BranchLocation(String bankName, String branchName, String address, String city,
-			String state, String zip, String country, String phoneNumber) {
-		super();
-		this.bankName = bankName;
-		this.branchName = branchName;
-		this.address = address;
-		this.city = city;
-		this.state = state;
-		this.zip = zip;
-		this.country = country;
-		this.phoneNumber = phoneNumber;
-	}
+            String state, String zip, String country, String phoneNumber) {
+        super();
+        this.bankName = bankName;
+        this.branchName = branchName;
+        this.address = address;
+        this.city = city;
+        this.state = state;
+        this.zip = zip;
+        this.country = country;
+        this.phoneNumber = phoneNumber;
+    }
 
-	public String getBankName() {
+    public void copyFields(BranchLocation copy) {
+        this.bankName = copy.bankName;
+        this.branchName = copy.branchName;
+        this.address = copy.address;
+        this.city = copy.city;
+        this.state = copy.state;
+        this.zip = copy.zip;
+        this.country = copy.country;
+        this.phoneNumber = copy.phoneNumber;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getBankName() {
         return bankName;
     }
 

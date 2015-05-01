@@ -1,4 +1,4 @@
-querydslblog
+postmangblog
 ============
 
-This is the sample project that corresponds to my blog series on Querydsl
+This is the sample project that corresponds to my blog series on Postman
