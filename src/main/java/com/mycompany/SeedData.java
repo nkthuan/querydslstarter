@@ -1,19 +1,31 @@
-package com.credera.querydsl;
+package com.mycompany;
 
-import org.springframework.context.ConfigurableApplicationContext;
+import com.mycompany.model.Account;
+import com.mycompany.model.BranchLocation;
+import com.mycompany.model.Customer;
+import com.mycompany.model.Transaction;
+import com.mycompany.repository.BranchLocationRepository;
+import com.mycompany.repository.CustomerRepository;
+import com.mycompany.repository.TransactionRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class SeedData {
-    
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(SeedData.class);
+
+    @Autowired
     private BranchLocationRepository branchRepository;
+
+    @Autowired
     private CustomerRepository customerRepository;
+
+    @Autowired
     private TransactionRepository transactionRepository;
-    
-    public SeedData(ConfigurableApplicationContext context ) {
-        branchRepository = context.getBean(BranchLocationRepository.class);
-        customerRepository = context.getBean(CustomerRepository.class);
-        transactionRepository = context.getBean(TransactionRepository.class);
-    }
-    
+
     public void seedData() {
         // save a couple of branches
         BranchLocation bl1 = branchRepository.save(new BranchLocation("Bank of Texas", "Downtown Penn", "600 Penn Street", "Fort Worth", "TX", "76102", "USA", "817-255-2108"));
@@ -42,5 +54,7 @@ public class SeedData {
         transactionRepository.save(new Transaction(matt, bl2 , 111021.53));
         transactionRepository.save(new Transaction(matt, bl3 , 72983.51));
         transactionRepository.save(new Transaction(matt, bl3 , 5924.21));
+
+        LOGGER.info("Done initializing data.");
     }
 }

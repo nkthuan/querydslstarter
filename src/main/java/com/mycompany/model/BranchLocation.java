@@ -1,4 +1,4 @@
-package com.credera.querydsl;
+package com.mycompany.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +9,7 @@ import javax.persistence.Id;
 public class BranchLocation {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private long id;
 
     private String bankName;
@@ -24,7 +24,7 @@ public class BranchLocation {
     protected BranchLocation() {}
 
     public BranchLocation(String bankName, String branchName, String address, String city,
-            String state, String zip, String country, String phoneNumber) {
+                          String state, String zip, String country, String phoneNumber) {
         super();
         this.bankName = bankName;
         this.branchName = branchName;

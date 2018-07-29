@@ -1,26 +1,21 @@
-package com.credera.querydsl.rest;
+package com.mycompany.controller;
 
+import com.mycompany.exception.BranchNotFoundException;
+import com.mycompany.exception.InvalidBranchException;
+import com.mycompany.model.BranchLocation;
+import com.mycompany.repository.BranchLocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.credera.querydsl.BranchLocation;
-import com.credera.querydsl.BranchLocationRepository;
-import com.credera.querydsl.rest.exception.BranchNotFoundException;
-import com.credera.querydsl.rest.exception.InvalidBranchException;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("/api/branch")
+@RequestMapping("/branch")
 public class BranchLocationController {
 
     @Autowired
     private BranchLocationRepository repository;
 
-    @RequestMapping(method=RequestMethod.POST)
+    @RequestMapping(method= RequestMethod.POST)
     public BranchLocation createBranch(@RequestBody BranchLocation branchLocation)  {
         if(branchLocation.getId() > 0) {
             throw new InvalidBranchException("Please specify a new branch location");
@@ -28,9 +23,9 @@ public class BranchLocationController {
         return repository.save(branchLocation);
     }
 
-    @RequestMapping(method=RequestMethod.GET, value="{id}")
+    @RequestMapping(method= RequestMethod.GET, value="{id}")
     public BranchLocation getBranch(@PathVariable long id)  {
-        BranchLocation branchLocation =  repository.findOne(id);
+        BranchLocation branchLocation =  repository.findById(id).orElse(null);
         if(branchLocation == null) {
             throw new BranchNotFoundException("Invalid Branch Location Id");
         }
@@ -38,9 +33,9 @@ public class BranchLocationController {
     }
 
 
-    @RequestMapping(method=RequestMethod.PUT, value="{id}")
+    @RequestMapping(method= RequestMethod.PUT, value="{id}")
     public BranchLocation updateBranch(@PathVariable long id, @RequestBody BranchLocation updatedBranchLocation) throws Exception {
-        BranchLocation toUpdate = repository.findOne(id);
+        BranchLocation toUpdate = repository.findById(id).orElse(null);
 
         if(toUpdate == null) {
             throw new BranchNotFoundException("Invalid Branch Location Id");
@@ -53,13 +48,13 @@ public class BranchLocationController {
         return repository.save(toUpdate);
     }
 
-    @RequestMapping(method=RequestMethod.DELETE, value="{id}")
+    @RequestMapping(method= RequestMethod.DELETE, value="{id}")
     public void deleteBranch(@PathVariable long id) throws Exception {
-        if(repository.findOne(id) == null) {
+        if(repository.findById(id).orElse(null) == null) {
             throw new BranchNotFoundException("Invalid Branch Location Id");
         }
 
-        repository.delete(id);
+        repository.deleteById(id);
     }
 
 }
