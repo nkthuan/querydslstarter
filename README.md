@@ -1,4 +1,4 @@
 postmangblog
 ============
 
-This is the sample project that corresponds to my blog series on Postman
+This is a starter project that serves as a boilerplate / helloworld project, which shows to use Querydsl (plus JPA) in Spring Boot.
